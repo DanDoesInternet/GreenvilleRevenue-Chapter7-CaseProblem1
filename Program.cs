@@ -7,6 +7,7 @@ class GreenvillRevenue
     static int[] skillCounts = { 0, 0, 0, 0 };
     static string[] contestants = { };
     static string[] skills = { };
+    
 
 
     private static void Main()
@@ -43,14 +44,21 @@ class GreenvillRevenue
         } while (inputString != "Q");
     }
 
+    // Chapter 8 Addition - Added TryParse method to ensure correct data type
+
     private static int getCount()
     {
-        string inputString;
         int count;
+        string inputString;
+
         WriteLine("enter the number of contestants in the talent show: ");
         inputString = ReadLine();
-        count = Convert.ToInt32(inputString);
-
+        while (!int.TryParse(inputString, out count))
+        {
+           WriteLine("Your entry was invalid, please enter an integer: ");
+           inputString = ReadLine();
+        }
+    
         while (count < 0 || count > 30)
         {
             WriteLine("Sorry, the number you have entered is invalid.  You must enter a number between 0 and 30: ");
